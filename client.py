@@ -3,12 +3,12 @@ import socket
 
 while True:
     try:
-        user_input = input("Input action and quantity: ")
-        split_input = user_input.split()
-        commands = ["add", "remove"]
-        if split_input[0] not in commands:
+        # Checking user input - Should not have any errors getting passed into the server
+        user_input = input("Input action (ex: +23 W): ")
+        if user_input[0] in "+-":
+            int(user_input[1:-2])
+        else:
             raise Exception
-        quantity = int(split_input[1])
 
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.connect(("127.0.0.1", 9999))

@@ -8,8 +8,6 @@ while True:
         connection, address = s.accept()
         with connection:
             print("Connected by", address)
-            while True:
-                data = connection.recv(1024)
-                if not data:
-                    break
-                connection.sendall(data)
+            data = connection.recv(1024)
+            decoded_data = data.decode()
+            connection.send("Request of \"{decoded_data}\" was completed ")
