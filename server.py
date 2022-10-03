@@ -1,5 +1,6 @@
 import socket
 
+total_needed_power = 0
 
 while True:
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -10,4 +11,12 @@ while True:
             print("Connected by", address)
             data = connection.recv(1024)
             decoded_data = data.decode()
-            connection.send("Request of \"{decoded_data}\" was completed ")
+            print("Received request of", decoded_data)
+
+            if decoded_data[0] == "+":
+                total_needed_power += int(decoded_data[1:-1])
+            else:
+                total_needed_power -= int(decoded_data[1:-1])
+            print("Total power is now", total_needed_power, "W")
+
+            connection.send(bytes(f"Request of {decoded_data} was completed", 'utf-8'))
