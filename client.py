@@ -25,20 +25,24 @@ def main():
     while True:
         try:
             # Checking user input - Should not have any errors getting passed into the server
-            user_input = input("Input action (ex: +23W): ")
-            command = user_input[0]
-            quantity = int(user_input[1:-1])
-            if command == "+" and user_input[-1] == "W":
-                client_total_power += quantity
-                print("Local power:", client_total_power, "W")
-                print(send_message(host, port, user_input, sensor_id))
-            elif command == "-" and user_input[-1] == "W":
-                if client_total_power - quantity < 0:
-                    raise ValueError
-                else:
-                    client_total_power -= quantity
+            user_input = input("Input action: ")
+            if user_input[0] in "+-":
+                quantity = int(user_input[1:-1])
+                if user_input[0] == "+" and user_input[-1] == "W":
+                    client_total_power += quantity
                     print("Local power:", client_total_power, "W")
                     print(send_message(host, port, user_input, sensor_id))
+                elif user_input[0] == "-" and user_input[-1] == "W":
+                    if client_total_power - quantity < 0:
+                        raise ValueError
+                    else:
+                        client_total_power -= quantity
+                        print("Local power:", client_total_power, "W")
+                        print(send_message(host, port, user_input, sensor_id))
+                else:
+                    raise ValueError
+            elif user_input == "exit":
+                send_message(host, port, user_input, sensor_id)
             else:
                 raise ValueError
         except ValueError:
