@@ -15,6 +15,15 @@ def main():
 
     client_total_power = 0
 
+    print(
+        """
+        ###########################################
+        # Welcome to the client for the 5G sensor #
+        ###########################################
+
+        """
+    )
+
     while True:
         try:
             # ID has to be a number

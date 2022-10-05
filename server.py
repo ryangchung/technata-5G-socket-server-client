@@ -8,6 +8,16 @@ def main():
     total_needed_power = 0
     current_usage = {}
 
+    print(
+        """
+        ###########################################
+        # Welcome to the client for the 5G sensor #
+        ###########################################
+
+        Receiving signals here:
+        """
+    )
+
     while True:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.bind((host, port))  # localhost, port above 1023
@@ -24,7 +34,7 @@ def main():
                         print("Removed ID:", sensor_id, "for exiting.")
                         print("Breakdown of power usage:", current_usage)
                     else:
-                        connection.send(bytes("Nothing to remove.", 'utf-8'))
+                        connection.send(bytes("Nothing to remove.", "utf-8"))
 
                 if decoded_data[0][0] in "+-":
                     power_quantity = int(decoded_data[0][1:-1])
