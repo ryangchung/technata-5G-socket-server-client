@@ -3,13 +3,13 @@ from sys import exit
 
 
 class Sensor:
-    sensor_total_power = 0
-    sensor_id = None
+    __sensor_total_power = 0
+    __sensor_id = None
 
     def __init__(self):
         while True:
             try:
-                self.sensor_id = input("Sensor ID: ")
+                self.__sensor_id = input("Sensor ID: ")
                 break
             except Exception:
                 print("Incorrect ID.")
@@ -22,16 +22,16 @@ class Sensor:
 
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.connect((host, port))
-            s.sendall(bytes(f"{message},{self.sensor_id}", "utf-8"))
+            s.sendall(bytes(f"{message},{self.__sensor_id}", "utf-8"))
             return s.recv(1024).decode()
 
     # Given an action, return the new power that this sensor is using
     def modify_power_draw(self, action, quantity):
         if action == "+":
-            self.sensor_total_power += quantity
+            self.__sensor_total_power += quantity
         else:
-            self.sensor_total_power += -quantity
-        print("Local power:", self.sensor_total_power, "W")
+            self.__sensor_total_power += -quantity
+        print("Local power:", self.__sensor_total_power, "W")
 
     def accept_commands(self):
         while True:
@@ -41,7 +41,7 @@ class Sensor:
                 if user_input[0] in "+-" and user_input[-1] == "W":
                     quantity = int(user_input[1:-1])
 
-                    if user_input[0] == "-" and self.sensor_total_power - quantity < 0:
+                    if user_input[0] == "-" and self.__sensor_total_power - quantity < 0:
                         raise ValueError
 
                     # Updating the power needed
