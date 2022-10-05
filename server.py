@@ -36,7 +36,6 @@ class Server:
                     # Decoded data
                     decoded_data = connection.recv(1024).decode().split(",")
                     sensor_id = decoded_data[1]
-                    print(sensor_id)
 
                     # If the sensor is shutting down
                     if decoded_data[0] == "exit":
