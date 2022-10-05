@@ -12,7 +12,7 @@ def send_message(message, sensor_id):
         return s.recv(1024).decode()
 
 # Given an action, return the new power that this sensor is using
-def power_action(action, quantity, sensor_total_power):
+def modify_power_draw(action, quantity, sensor_total_power):
     if action == "+":
         new_sensor_total_power = sensor_total_power + quantity
     else:
@@ -42,7 +42,7 @@ def main():
                     raise ValueError
 
                 # Updating the power needed
-                sensor_total_power = power_action(user_input[0], quantity, sensor_total_power)
+                sensor_total_power = modify_power_draw(user_input[0], quantity, sensor_total_power)
                 # Sending message to server
                 print(send_message(user_input, sensor_id))
             elif user_input == "exit":
