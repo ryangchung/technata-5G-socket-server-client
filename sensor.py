@@ -1,6 +1,7 @@
 import socket
 from sys import exit
 
+
 class Sensor:
     sensor_total_power = 0
     sensor_id = None
@@ -8,13 +9,11 @@ class Sensor:
     def __init__(self):
         while True:
             try:
-                sensor_id = input("Sensor ID: ")
+                self.sensor_id = input("Sensor ID: ")
                 break
             except Exception:
                 print("Incorrect ID.")
-
         self.accept_commands()
-
 
     # Sends the message and sensor ID through the given socket
     def send_message(self, message):
@@ -26,15 +25,13 @@ class Sensor:
             s.sendall(bytes(f"{message},{self.sensor_id}", "utf-8"))
             return s.recv(1024).decode()
 
-
     # Given an action, return the new power that this sensor is using
     def modify_power_draw(self, action, quantity):
         if action == "+":
             self.sensor_total_power += quantity
         else:
-            self.sensor_total_power += - quantity
+            self.sensor_total_power += -quantity
         print("Local power:", self.sensor_total_power, "W")
-
 
     def accept_commands(self):
         while True:
