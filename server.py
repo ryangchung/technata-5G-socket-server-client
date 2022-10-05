@@ -44,7 +44,7 @@ class Server:
                             f"Received request of {decoded_data[0]} by ID: {sensor_id}"
                         )
                         if sensor_id in self.__current_usage.keys():
-                            self.__current_usage = self.remove_from_dict(sensor_id)
+                            self.remove_from_dict(sensor_id)
                             self.__total_needed_power = sum(self.__current_usage.values())
                             print("Removed ID:", sensor_id, "for exiting.")
                             print("Breakdown of power usage:", self.__current_usage)
