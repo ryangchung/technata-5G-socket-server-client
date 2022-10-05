@@ -1,4 +1,5 @@
 import socket
+from sys import exit
 
 
 def send_message(host, port, message, sensor_id):
@@ -42,7 +43,8 @@ def main():
                 else:
                     raise ValueError
             elif user_input == "exit":
-                send_message(host, port, user_input, sensor_id)
+                print(send_message(host, port, user_input, sensor_id))
+                exit()
             else:
                 raise ValueError
         except ValueError:

@@ -1,4 +1,3 @@
-from base64 import decode
 import socket
 
 
@@ -17,13 +16,20 @@ def main():
             with connection:
                 # print("Connected by", address)
                 decoded_data = connection.recv(1024).decode().split(",")
-                power_quantity, sensor_id = int(decoded_data[0][1:-1]), decoded_data[1]
-                print(f"Received request of {decoded_data[0]} by ID: {sensor_id}")
+                sensor_id = decoded_data[1]
 
                 if decoded_data[0] == "exit":
-                    del current_usage[sensor_id]
+                    if sensor_id in current_usage.keys():
+                        del current_usage[sensor_id]
+                        print("Removed ID:", sensor_id, "for exiting.")
+                        print("Breakdown of power usage:", current_usage)
+                    else:
+                        connection.send(bytes("Nothing to remove.", 'utf-8'))
 
                 if decoded_data[0][0] in "+-":
+                    power_quantity = int(decoded_data[0][1:-1])
+                    print(f"Received request of {decoded_data[0]} by ID: {sensor_id}")
+
                     if sensor_id not in current_usage.keys():
                         current_usage[sensor_id] = 0
                         current_usage = dict(sorted(current_usage.items()))
