@@ -11,7 +11,7 @@ def main():
     print(
         """
         ###########################################
-        # Welcome to the client for the 5G sensor #
+        # Welcome to the server for the 5G sensor #
         ###########################################
 
         Receiving signals here:
