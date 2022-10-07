@@ -3,7 +3,7 @@ from sys import exit
 
 
 class Sensor:
-    __sensor_total_power = 0
+    __sensor_total_power = 7500  # Default house wattage
     __sensor_id = None
 
     def __init__(self):
@@ -51,6 +51,7 @@ class Sensor:
                 elif user_input == "exit":
                     # Sending message to server
                     print(self.send_message(user_input))
+                    print("Adding to backup network...")
                     exit()
                 else:
                     raise ValueError

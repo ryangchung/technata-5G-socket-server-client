@@ -3,7 +3,8 @@ import socket
 
 class Server:
     __total_needed_power = 0
-    __current_usage: dict = {}
+    __current_usage = {}
+    __backup_network = {}
 
     # Given an action, return the new power that this sensor is using
     def modify_power_draw(self, action, power_quantity, sensor_id):
@@ -45,11 +46,14 @@ class Server:
                         )
                         if sensor_id in self.__current_usage.keys():
                             self.remove_from_dict(sensor_id)
-                            self.__total_needed_power = sum(self.__current_usage.values())
+                            self.__total_needed_power = sum(self.__current_usage.values()) + sum(self.__backup_network.values())
+                            self.__backup_network[sensor_id] = 7500
                             print("Removed ID:", sensor_id, "for exiting.")
                             print("Breakdown of power usage:", self.__current_usage)
+                            print("Backup Network:", self.__backup_network)
                         else:
                             connection.send(bytes("Nothing to remove.", "utf-8"))
+                            print("Backup Network:", self.__backup_network)
 
                     # If the command is requesting a difference in power draw
                     elif decoded_data[0][0] in "+-":
@@ -76,6 +80,7 @@ class Server:
                         # Output
                         print("Total power is now", self.__total_needed_power, "W")
                         print("Breakdown of power usage:", self.__current_usage)
+                        print("Backup Network:", self.__backup_network)
 
                         # Send connection success
                         connection.send(
