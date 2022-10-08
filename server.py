@@ -32,7 +32,7 @@ class Server:
                 s.listen()
                 connection, address = s.accept()
                 with connection:
-                    print("Connected by", address)
+                    # print("Connected by", address)
 
                     # Decoded data
                     decoded_data = connection.recv(1024).decode().split(",")
@@ -47,7 +47,7 @@ class Server:
                         if sensor_id in self.__current_usage.keys():
                             self.remove_from_dict(sensor_id)
                             self.__total_needed_power = sum(self.__current_usage.values()) + sum(self.__backup_network.values())
-                            self.__backup_network[sensor_id] = 7500
+                            self.__backup_network[sensor_id] = 5000
                             print("Removed ID:", sensor_id, "for exiting.")
                             print("Breakdown of power usage:", self.__current_usage)
                             print("Backup Network:", self.__backup_network)

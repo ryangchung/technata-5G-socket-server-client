@@ -3,7 +3,7 @@ from sys import exit
 
 
 class Sensor:
-    __sensor_total_power = 7500  # Default house wattage
+    __sensor_total_power = 5000  # Default house wattage
     __sensor_id = None
 
     def __init__(self):
