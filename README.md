@@ -17,6 +17,6 @@ Requesting Power: +<number>W
 Releasing Power: -<number>W
 Exit (simulating failure or offline sensor): exit
 
-## How to use
+## How To Use
 1. Clone the repository.
 2. Open two or more terminals, running the server.py and sensor.py files in each terminal.
