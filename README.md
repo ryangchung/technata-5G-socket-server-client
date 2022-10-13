@@ -13,8 +13,8 @@ On average, 10% of power is lost from the power grid during distribution to the 
 This proof of concept focuses on what would happen internally within the sensor, with user input being an abstraction of the power load tracking. It sends a ping in real time to the socket server and receives feedback from the server aknowledging the request.
 
 ## Commands
-Requesting Power: +<number>W
-Releasing Power: -<number>W
+Requesting Power: +<number>W <br>
+Releasing Power: -<number>W <br>
 Exit (simulating failure or offline sensor): exit
 
 ## How To Use
