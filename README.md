@@ -9,5 +9,5 @@ The hackathon was to find a solution for water and electricity waste using 5G. T
 
 On average, 10% of power is lost from the power grid during distribution to the end user. However, the current system sends a constant stream of power that will never be fully utilized. By limiting the amount of power sent overall to the buildings to what is actually needed, the 10% of power lost would be a great saving.
 
-## Proof of Concept
+### Proof of Concept
 This proof of concept focuses on what would happen internally within the sensor, with user input being an abstraction of the power load tracking. It sends a ping in real time to the socket server and receives feedback from the server aknowledging the request.
