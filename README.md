@@ -1,7 +1,7 @@
 # technata-hacks-python-backend
 
 ## Objective
-This project was part of a team pitch for the Technata Hacks 2022 Hackathon. The project was awarded 4th place.
+This project was part of a team pitch for the Technata Hacks 2022 Hackathon. The project in the top 5.
 This is a socket programming project aimed at being a proof of concept of the underlying features of our project, explained below.
 
 ## Project
